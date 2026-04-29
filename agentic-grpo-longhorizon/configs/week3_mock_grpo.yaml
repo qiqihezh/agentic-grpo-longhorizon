@@ -1,0 +1,88 @@
+# Week 3 Mock GRPO (5 step) — pipeline validation
+# Design: §4.3
+# Run: bash scripts/20_run_week3_mock.sh
+hydra:
+  searchpath:
+    - pkg://verl/trainer/config
+
+defaults:
+  - ppo_trainer
+  - _self_
+
+data:
+  train_files: experiments/week3_mock/train.parquet
+  val_files: experiments/week3_mock/val.parquet
+  train_batch_size: 4
+  max_prompt_length: 8192
+  max_response_length: 12288
+  return_raw_chat: True
+  tool_config_path: configs/tool_config/tau_bench_airline_tools.yaml
+
+actor_rollout_ref:
+  model:
+    path: experiments/week2_sft_lora_merged
+    enable_gradient_checkpointing: true
+    lora_rank: 16
+    lora_alpha: 32
+    override_config:
+      attn_implementation: flash_attention_2
+  actor:
+    fsdp_config:
+      optimizer_offload: true       # 绝对不能关
+      param_offload: true          # 权重常驻GPU，+14GB，提速
+      model_dtype: bf16
+    optim:
+      lr: 5.0e-6
+    use_kl_loss: True
+    kl_loss_coef: 0.01
+    kl_loss_type: low_var_kl
+    ppo_mini_batch_size: 4
+    ppo_micro_batch_size_per_gpu: 1   # 保持1，安全阀
+  rollout:
+    name: "vllm"
+    mode: async
+    agent:
+      default_agent_loop: tool_agent
+    multi_turn:
+      enable: True
+      format: "hermes"
+      max_user_turns: 15
+      max_assistant_turns: 15
+      tool_config_path: configs/tool_config/tau_bench_airline_tools.yaml
+      interaction_config_path: configs/interaction_config/tau_bench_airline.yaml
+    n: 4                              # group size 4，测试
+    temperature: 0.7
+    top_p: 0.9
+    tensor_model_parallel_size: 1
+    gpu_memory_utilization: 0.50      # 给vLLM 40GB
+    free_cache_engine: true           # 必须保持！
+    max_num_seqs: 4                   # 16条trajectory分4轮
+    max_model_len: 24576
+    max_num_batched_tokens: 24576
+    log_prob_micro_batch_size_per_gpu: 1   
+  ref:
+    fsdp_config:
+      optimizer_offload: true
+      param_offload: true            
+      model_dtype: bf16
+    model:
+      path: experiments/week2_sft_lora_merged
+      override_config:
+        attn_implementation: flash_attention_2
+    log_prob_micro_batch_size_per_gpu: 1   
+
+algorithm:
+  adv_estimator: grpo
+  kl_ctrl:
+    kl_coef: 0.01
+
+trainer:
+  total_epochs: 1
+  total_training_steps: 5
+  save_freq: -1
+  test_freq: -1
+  logger: ['console', 'swanlab']
+  project_name: agentic-grpo-longhorizon
+  experiment_name: week3_mock_5step
+  n_gpus_per_node: 1
+  nnodes: 1

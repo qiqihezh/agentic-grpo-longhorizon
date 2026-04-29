@@ -1,0 +1,27 @@
+# Week 2: SFT 后评测配置
+# policy = SFT-merged 7B, user sim = 72B-AWQ
+# 跟 Week 1 baseline_airline_72B_user 严格可比
+
+env:
+  name: airline
+  user_strategy: llm
+  user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+  user_provider: openai
+  user_base_url: "http://localhost:8001/v1"
+  task_split: test  # ⚠️ 必须 test，且和 Week 1 一致
+
+policy:
+  model_name: "Qwen/Qwen2.5-7B-Instruct"  # served-model-name 保持不变，方便接口稳定
+  base_url: "http://localhost:8000/v1"
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 1024
+
+eval:
+  num_tasks: 50
+  num_samples_per_task: 4
+  max_turns: 30
+  num_workers: 2
+
+output:
+  dir: "experiments/week2_eval_sft_airline"

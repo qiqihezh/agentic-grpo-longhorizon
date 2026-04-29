@@ -1,0 +1,44 @@
+# Week 2 Day 1-2: SFT 数据采集配置
+# 双卡 A800 分离部署：
+#   - GPU 0 (port 8000): 72B-AWQ 当 policy 跑 trajectory
+#   - GPU 1 (port 8001): 72B-AWQ 当 user simulator
+# 两张卡各加载一份模型到显存，消除单卡争抢瓶颈
+# 全 50 task 都跑 best-of-16 采集，但 SFT 训练集只用 40 个 seen task
+# 10 个 holdout task 的成功 trajectory 单独保存到 holdout_train.jsonl（备用）
+# 评测时分 seen / unseen / overall 三组报数
+#
+# [16K 主动截断策略]
+# - vLLM max_model_len = 16384
+# - 主动截断阈值 = 35000 字符（≈11-12K tokens，留 2K 给生成）
+# - 一旦触发截断，整条 trajectory 标记为 contaminated，不进 train.jsonl
+# - best_of_16 兜底：长 trajectory 被过滤后，短 trajectory 仍有 15 次机会补充
+
+env:
+  name: airline
+  user_strategy: llm
+  user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+  user_provider: openai
+  user_base_url: "http://localhost:8001/v1"  # GPU 1 跑 user sim
+  task_split: test  # τ-bench airline 只有 test split (50 task)
+
+policy:
+  # 采集时 policy = 72B-AWQ，独占 GPU 0 (port 8000)
+  # 与 user sim 分离部署，不再争抢 seq slots
+  model_name: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+  base_url: "http://localhost:8000/v1"         # GPU 0 跑 policy
+  top_p: 0.9
+  max_tokens: 512                              # 512 留安全余量应对复杂 tool call ，同时 input 仍有 15.6K 空间
+  # temperature 由 collect.temperatures 控制每次采样
+
+collect:
+  best_of_n: 16
+  # 分层采样：4×greedy + 4×轻度探索 + 4×标准多样化 + 4×激进探索
+  temperatures: [0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0]
+  max_turns: 30
+  num_workers: 4   # 4 个 task 并发，单 task 内 best-of-16 串行
+                   # policy 端 4 seq slots，user sim 端 8 seq slots，峰值 4+4 不排队
+  holdout_size: 10 # 选项 D: 10 个 task 留作 unseen 评测，40 个进 SFT 训练
+
+
+output:
+  dir: "experiments/week2_sft_collect_airline_test"

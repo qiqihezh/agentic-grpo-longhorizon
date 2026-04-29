@@ -1,0 +1,15 @@
+# veRL Interaction config
+# 用法: actor_rollout_ref.rollout.multi_turn.interaction_config_path 指向本文件
+# ToolAgentLoop 在启动时调用 initialize_interactions_from_config 加载
+# parquet 的 extra_info.interaction_kwargs.name 必须匹配下面的 name: "tau_bench_airline"
+interaction:
+  - name: "tau_bench_airline"
+    class_name: "src.envs.tau_bench_interaction.TauBenchInteraction"
+    config:
+      env_name: "airline"
+      user_strategy: "llm"
+      user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+      user_provider: "openai"
+      user_base_url: "http://localhost:8001/v1"
+      task_split: "test"
+      max_turns: 30  # 评测口径,与 Week 1/2 一致

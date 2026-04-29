@@ -1,0 +1,24 @@
+# Week 1 baseline 评测配置
+env:
+  name: airline
+  user_strategy: llm
+  user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"  # user simulator 用 72B
+  user_provider: openai                          # 通过 vLLM OpenAI API
+  user_base_url: "http://localhost:8001/v1"      # 72B 的 vLLM 地址
+  task_split: test
+
+policy:
+  model_name: "Qwen/Qwen2.5-7B-Instruct"        # agent 用 7B
+  base_url: "http://localhost:8000/v1"
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 1024
+
+eval:
+  num_tasks: 50          # airline 测试集一共 50 条,想快速先跑 10
+  num_samples_per_task: 4  # 为了算 pass^4
+  max_turns: 30
+  num_workers: 2           # 并发数,根据 vLLM throughput 调
+
+output:
+  dir: "experiments/week1_baseline_airline_72B_user"

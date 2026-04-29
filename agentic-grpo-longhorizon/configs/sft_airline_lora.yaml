@@ -1,0 +1,51 @@
+# Week 2 Day 3-4: LoRA SFT 训练配置
+# 参考 PROJECT.md §2.3: r=16, alpha=32, lr=1e-4, 3 epoch
+
+model:
+  name_or_path: "../models/Qwen2.5-7B-Instruct"  # 本地路径，跟 vLLM server 一致
+  attn_impl: "sdpa"  # 海光 DCU 不支持时改 "sdpa flash_attention_2"
+
+data:
+  train_jsonl: "experiments/week2_sft_collect_airline/train.jsonl"
+  eval_jsonl: null  # 数据少先不切 eval；后期可以从 train 抽 5%
+  max_length: 10240  # 训练集中最长 trajectory ~10K，留安全余量
+                    # 降低 max_length 加速训练，减少显存占用
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  # 全 linear 都加 LoRA。Qwen2.5 attention + MLP 的 linear 名字
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+train:
+  num_epochs: 5
+  per_device_batch_size: 2   # 16K 长度 + 7B + bf16 + grad ckpt，单 A800 大概率刚好 2
+                             # 4090 24GB 必须 1
+  grad_accum_steps: 4        # 等效 batch=8
+  lr: 1.0e-4                 # LoRA SFT 的 lr 比全参数大 10x，1e-4 是常用值
+  lr_scheduler: cosine
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  logging_steps: 5
+  save_strategy: epoch
+  save_total_limit: 3
+  run_name: "w2_sft_airline_lora"
+  seed: 42
+
+# logger 配置（通过 callback 接入，不走 HF 自带 report_to）
+logger:
+  backend: swanlab          # "swanlab" | "none"
+  project: "agentic-grpo-longhorizon"
+  description: "Week 2 SFT warmup on airline "
+
+output:
+  dir: "experiments/week2_sft_lora"
