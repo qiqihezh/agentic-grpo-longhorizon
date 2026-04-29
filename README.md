@@ -1,6 +1,6 @@
 # Agentic GRPO for Long-Horizon Tasks
 
-本仓库用于探索 **Agentic GRPO（Group Relative Policy Optimization）在长时程（long-horizon）决策任务上的应用**，覆盖 SFT 数据构建、LoRA 微调、多轮 Rollout 与策略优化等完整链路。
+本仓库用于探索 **Agentic GRPO（Group Relative Policy Optimization）在长时程（long-horizon）决策任务上的应用**，覆盖baselin测评、SFT 数据构建、LoRA 微调、GRPO训练、多轮 Rollout 与策略优化等完整链路。
 
 ---
 
@@ -8,7 +8,7 @@
 
 | 目录 | 说明 |
 |------|------|
-| `agentic-grpo-longhorizon/` | **主项目**。包含配置、数据收集脚本、SFT/评测脚本、实验记录与项目文档 |
+| `agentic-grpo-longhorizon/` | **主项目**。包含配置、数据收集脚本、SFT/评测脚本、GRPO脚本、实验记录与项目文档 |
 | `tau-bench/` | **评测环境**。基于 τ-bench 的航空（Airline）与零售（Retail）多轮交互任务环境 |
 | `verl/` | **训练框架**。基于 [volcengine/verl](https://github.com/volcengine/verl) 修改的 RL 训练框架，支持多轮工具调用与 rollout |
 
@@ -43,7 +43,7 @@ pip install flash-attn --no-build-isolation
 
 ## 📂 agentic-grpo-longhorizon 目录详解
 
-```
+```raw
 agentic-grpo-longhorizon/
 ├── configs/                    # 训练与评测配置
 │   ├── baseline_airline.yaml
