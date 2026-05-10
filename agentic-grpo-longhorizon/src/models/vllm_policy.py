@@ -102,6 +102,9 @@ class VLLMPolicy:
         return system_msgs + kept
 
     def __call__(self, messages: list) -> OpenAICompatibleDict:
+        # [Fix: policy 状态泄漏] 每次调用前重置截断标记
+        self.was_truncated = False
+
         # 1. 深度清洗消息格式
         sanitized = []
         for m in messages:

@@ -107,6 +107,10 @@ class TauBenchWrapper:
             policy.set_tools(env.tools_info)
         obs_res = env.reset(task_index=task_idx)
 
+        # [Fix: policy 状态泄漏] 每个 task 开始前重置截断标记
+        if hasattr(policy, "was_truncated"):
+            policy.was_truncated = False
+
         # tau-bench reset 返回 EnvResetResponse(observation=str, info=EnvInfo)
         # 初始 observation 就是用户的第一条消息
         # 
@@ -115,13 +119,22 @@ class TauBenchWrapper:
         # 这导致 search_direct_flight/search_onestop_flight 永远返回 []。
         # 注入一条 system message 强制锚定当前日期为 2024-05-15。
         
-        system_content = (
-            "# Current Date Context\n"
-            "The current date is 2024-05-15 (Wednesday). "
-            "When users mention dates without specifying the year, "
-            "always assume they refer to 2024. "
-            "All flight searches and reservations should use 2024 dates unless explicitly stated otherwise."
-        )
+        if self.env_name == "retail":
+            system_content = (
+                "# Current Date Context\n"
+                "The current date is 2024-05-15 (Wednesday). "
+                "When users mention dates without specifying the year, "
+                "always assume they refer to 2024. "
+                "All product orders and exchanges should use 2024 dates unless explicitly stated otherwise."
+            )
+        else:
+            system_content = (
+                "# Current Date Context\n"
+                "The current date is 2024-05-15 (Wednesday). "
+                "When users mention dates without specifying the year, "
+                "always assume they refer to 2024. "
+                "All flight searches and reservations should use 2024 dates unless explicitly stated otherwise."
+            )
         messages = [
             {"role": "system", "content": system_content},
             {"role": "user", "content": str(obs_res.observation)},
