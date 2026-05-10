@@ -46,7 +46,7 @@
 40 个训练任务中有 16 个是 *covered_seen*（有 72B 教师轨迹覆盖）。策略记住教师模式，covered 性能虚高，而 uncovered/unseen 几乎为零。
 
 ### 3. 每轮推理退化
-线性长度归一化 `advantage / L` 惩罚长回复。策略学会**"以量补质"** —— 短推理 + 频繁工具试错 —— 导致 step 150 后崩溃。
+线性长度归一化 `advantage / L` 惩罚长回复。策略学会"以量补质" —— 短推理 + 频繁工具试错 —— 导致 step 150 后崩溃。
 
 > **关键发现**：训练验证奖励**不是**可靠代理。Turn-Discount 报告验证奖励 0.80，但真实评测仅 0.125 —— **6.4 倍差距**。
 
@@ -130,47 +130,47 @@
 ## 🏗️ 项目结构
 
 ```raw
-agentic-grpo-longhorizon/
-├── configs/                    # 所有实验的 Hydra YAML 配置
+📦 agentic-grpo-longhorizon/
+├── ⚙️ configs/                 # 所有实验的 Hydra YAML 配置
 │   ├── turn_discount.yaml
 │   ├── prm_lite.yaml
 │   ├── lata.yaml
 │   ├── prm_lite_lata.yaml
 │   └── eval/                   # 各实验评测配置
-├── src/
-│   ├── envs/                   # τ-bench 包装器与工具配置
-│   │   ├── tau_bench_wrapper.py
-│   │   ├── tau_bench_interaction.py   # PRM-Lite 规则引擎
-│   │   └── tau_bench_tools.py
-│   ├── evaluation/
-│   │   └── pass_k_eval.py      # 独立 pass@k 评测器
-│   ├── models/
-│   │   └── vllm_policy.py      # vLLM 策略包装器
-│   └── training/
-│       └── sft_dataset.py      # SFT 数据收集
-├── scripts/
-│   ├── train/grpo/             # GRPO 训练启动脚本
-│   │   ├── run_exp1_turn_discount.sh
-│   │   ├── run_exp2_lata.sh
-│   │   ├── run_exp3_prm_lite.sh
-│   │   ├── run_exp4_prm_lite_lata.sh
-│   │   └── run_vanilla.sh
-│   ├── eval/                   # 独立评测启动脚本
-│   │   ├── eval_exp1_turn_discount.sh
-│   │   ├── eval_exp2_lata.sh
-│   │   ├── eval_exp3_prm_lite.sh
-│   │   └── eval_exp4_prm_lite_lata.sh
-│   ├── train/sft/              # SFT 预热脚本
-│   └── vllm_server/            # vLLM 服务启动脚本
-├── docs/
-│   └── ablation/
-│       ├── ablation_diagnosis_report.md   # 完整诊断报告（≈800 行）
-│       ├── ablation_plan.md               # 实验设计手册
-│       ├── ablation_comparison.png
-│       └── ablation_progression.png
-├── experiments/                # 检查点、HF 导出、评测输出
-├── requirements.txt
-└── setup.sh                    # 一键环境搭建
+├── 💻 src/                     # 核心源码
+│   ├── 🌍 envs/                # τ-bench 包装器与工具配置
+│   │   ├── 🐍 tau_bench_wrapper.py
+│   │   ├── 🐍 tau_bench_interaction.py   # PRM-Lite 规则引擎
+│   │   └── 🐍 tau_bench_tools.py
+│   ├── 📊 evaluation/
+│   │   └── 🐍 pass_k_eval.py   # 独立 pass@k 评测器
+│   ├── 🧠 models/
+│   │   └── 🐍 vllm_policy.py   # vLLM 策略包装器
+│   └── 🎓 training/
+│       └── 🐍 sft_dataset.py   # SFT 数据收集
+├── 📜 scripts/
+│   ├── 🚀 train/grpo/          # GRPO 训练启动脚本
+│   │   ├── 📜 run_exp1_turn_discount.sh
+│   │   ├── 📜 run_exp2_lata.sh
+│   │   ├── 📜 run_exp3_prm_lite.sh
+│   │   ├── 📜 run_exp4_prm_lite_lata.sh
+│   │   └── 📜 run_vanilla.sh
+│   ├── 📈 eval/                # 独立评测启动脚本
+│   │   ├── 📜 eval_exp1_turn_discount.sh
+│   │   ├── 📜 eval_exp2_lata.sh
+│   │   ├── 📜 eval_exp3_prm_lite.sh
+│   │   └── 📜 eval_exp4_prm_lite_lata.sh
+│   ├── 🔧 train/sft/           # SFT 预热脚本
+│   └── 🖥️ vllm_server/         # vLLM 服务启动脚本
+├── 📚 docs/
+│   └── 🔬 ablation/
+│       ├── 📝 ablation_diagnosis_report.md   # 完整诊断报告（≈800 行）
+│       ├── 📝 ablation_plan.md               # 实验设计手册
+│       ├── 🖼️ ablation_comparison.png
+│       └── 🖼️ ablation_progression.png
+├── 🧪 experiments/             # 检查点、HF 导出、评测输出
+├── 📄 requirements.txt
+└── 🔨 setup.sh                 # 一键环境搭建
 ```
 
 ---
@@ -220,11 +220,12 @@ bash eval_exp4_prm_lite_lata.sh
 
 ## 📚 文档
 
-| 文档 | 内容 |
+| 📄 文档 | 📝 内容 |
 |----------|---------|
 | [`docs/ablation/ablation_diagnosis_report.md`](docs/ablation/ablation_diagnosis_report.md) | **主报告**：训练曲线、评测数据、机制分析、假设验证 |
 | [`docs/ablation/ablation_plan.md`](docs/ablation/ablation_plan.md) | 实验设计手册：代码实现、PRM-Lite 规则集、黑客风险分析 |
 | [`docs/vanilla_grpo/vanilla_grpo_diagnosis.md`](docs/vanilla_grpo/vanilla_grpo_diagnosis.md) | Vanilla GRPO 崩溃诊断：三个根本原因、五个检查点分析 |
+| [`../agentic-grpo-longhorizon-blog.md`](../agentic-grpo-longhorizon-blog.md) | 🆕 技术博客：从训练崩溃到稳定收敛的完整复盘（PRM-Lite + LATA） |
 
 ---
 
