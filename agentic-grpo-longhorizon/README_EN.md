@@ -130,47 +130,47 @@ A fully interpretable, zero-trainable-parameter process reward model:
 ## 🏗️ Project Structure
 
 ```
-agentic-grpo-longhorizon/
-├── configs/                    # Hydra YAML configs for all experiments
+📦 agentic-grpo-longhorizon/
+├── ⚙️ configs/                 # Hydra YAML configs for all experiments
 │   ├── turn_discount.yaml
 │   ├── prm_lite.yaml
 │   ├── lata.yaml
 │   ├── prm_lite_lata.yaml
 │   └── eval/                   # Per-experiment eval configs
-├── src/
-│   ├── envs/                   # τ-bench wrapper & tool configs
-│   │   ├── tau_bench_wrapper.py
-│   │   ├── tau_bench_interaction.py   # PRM-Lite rule engine
-│   │   └── tau_bench_tools.py
-│   ├── evaluation/
-│   │   └── pass_k_eval.py      # Independent pass@k evaluator
-│   ├── models/
-│   │   └── vllm_policy.py      # vLLM-based policy wrapper
-│   └── training/
-│       └── sft_dataset.py      # SFT data collection
-├── scripts/
-│   ├── train/grpo/             # GRPO training launchers
-│   │   ├── run_exp1_turn_discount.sh
-│   │   ├── run_exp2_lata.sh
-│   │   ├── run_exp3_prm_lite.sh
-│   │   ├── run_exp4_prm_lite_lata.sh
-│   │   └── run_vanilla.sh
-│   ├── eval/                   # Independent eval launchers
-│   │   ├── eval_exp1_turn_discount.sh
-│   │   ├── eval_exp2_lata.sh
-│   │   ├── eval_exp3_prm_lite.sh
-│   │   └── eval_exp4_prm_lite_lata.sh
-│   ├── train/sft/              # SFT warmup scripts
-│   └── vllm_server/            # vLLM server startup scripts
-├── docs/
-│   └── ablation/
-│       ├── ablation_diagnosis_report.md   # Full diagnosis (≈800 lines)
-│       ├── ablation_plan.md               # Experiment design manual
-│       ├── ablation_comparison.png
-│       └── ablation_progression.png
-├── experiments/                # Checkpoints, HF exports, eval outputs
-├── requirements.txt
-└── setup.sh                    # One-click environment setup
+├── 💻 src/                     # Core source code
+│   ├── 🌍 envs/                # τ-bench wrapper & tool configs
+│   │   ├── 🐍 tau_bench_wrapper.py
+│   │   ├── 🐍 tau_bench_interaction.py   # PRM-Lite rule engine
+│   │   └── 🐍 tau_bench_tools.py
+│   ├── 📊 evaluation/
+│   │   └── 🐍 pass_k_eval.py   # Independent pass@k evaluator
+│   ├── 🧠 models/
+│   │   └── 🐍 vllm_policy.py   # vLLM-based policy wrapper
+│   └── 🎓 training/
+│       └── 🐍 sft_dataset.py   # SFT data collection
+├── 📜 scripts/
+│   ├── 🚀 train/grpo/          # GRPO training launchers
+│   │   ├── 📜 run_exp1_turn_discount.sh
+│   │   ├── 📜 run_exp2_lata.sh
+│   │   ├── 📜 run_exp3_prm_lite.sh
+│   │   ├── 📜 run_exp4_prm_lite_lata.sh
+│   │   └── 📜 run_vanilla.sh
+│   ├── 📈 eval/                # Independent eval launchers
+│   │   ├── 📜 eval_exp1_turn_discount.sh
+│   │   ├── 📜 eval_exp2_lata.sh
+│   │   ├── 📜 eval_exp3_prm_lite.sh
+│   │   └── 📜 eval_exp4_prm_lite_lata.sh
+│   ├── 🔧 train/sft/           # SFT warmup scripts
+│   └── 🖥️ vllm_server/         # vLLM server startup scripts
+├── 📚 docs/
+│   └── 🔬 ablation/
+│       ├── 📝 ablation_diagnosis_report.md   # Full diagnosis (≈800 lines)
+│       ├── 📝 ablation_plan.md               # Experiment design manual
+│       ├── 🖼️ ablation_comparison.png
+│       └── 🖼️ ablation_progression.png
+├── 🧪 experiments/             # Checkpoints, HF exports, eval outputs
+├── 📄 requirements.txt
+└── 🔨 setup.sh                 # One-click environment setup
 ```
 
 ---

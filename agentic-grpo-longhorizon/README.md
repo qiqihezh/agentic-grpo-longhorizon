@@ -130,47 +130,47 @@
 ## 🏗️ 项目结构
 
 ```raw
-agentic-grpo-longhorizon/
-├── configs/                    # 所有实验的 Hydra YAML 配置
+📦 agentic-grpo-longhorizon/
+├── ⚙️ configs/                 # 所有实验的 Hydra YAML 配置
 │   ├── turn_discount.yaml
 │   ├── prm_lite.yaml
 │   ├── lata.yaml
 │   ├── prm_lite_lata.yaml
 │   └── eval/                   # 各实验评测配置
-├── src/
-│   ├── envs/                   # τ-bench 包装器与工具配置
-│   │   ├── tau_bench_wrapper.py
-│   │   ├── tau_bench_interaction.py   # PRM-Lite 规则引擎
-│   │   └── tau_bench_tools.py
-│   ├── evaluation/
-│   │   └── pass_k_eval.py      # 独立 pass@k 评测器
-│   ├── models/
-│   │   └── vllm_policy.py      # vLLM 策略包装器
-│   └── training/
-│       └── sft_dataset.py      # SFT 数据收集
-├── scripts/
-│   ├── train/grpo/             # GRPO 训练启动脚本
-│   │   ├── run_exp1_turn_discount.sh
-│   │   ├── run_exp2_lata.sh
-│   │   ├── run_exp3_prm_lite.sh
-│   │   ├── run_exp4_prm_lite_lata.sh
-│   │   └── run_vanilla.sh
-│   ├── eval/                   # 独立评测启动脚本
-│   │   ├── eval_exp1_turn_discount.sh
-│   │   ├── eval_exp2_lata.sh
-│   │   ├── eval_exp3_prm_lite.sh
-│   │   └── eval_exp4_prm_lite_lata.sh
-│   ├── train/sft/              # SFT 预热脚本
-│   └── vllm_server/            # vLLM 服务启动脚本
-├── docs/
-│   └── ablation/
-│       ├── ablation_diagnosis_report.md   # 完整诊断报告（≈800 行）
-│       ├── ablation_plan.md               # 实验设计手册
-│       ├── ablation_comparison.png
-│       └── ablation_progression.png
-├── experiments/                # 检查点、HF 导出、评测输出
-├── requirements.txt
-└── setup.sh                    # 一键环境搭建
+├── 💻 src/                     # 核心源码
+│   ├── 🌍 envs/                # τ-bench 包装器与工具配置
+│   │   ├── 🐍 tau_bench_wrapper.py
+│   │   ├── 🐍 tau_bench_interaction.py   # PRM-Lite 规则引擎
+│   │   └── 🐍 tau_bench_tools.py
+│   ├── 📊 evaluation/
+│   │   └── 🐍 pass_k_eval.py   # 独立 pass@k 评测器
+│   ├── 🧠 models/
+│   │   └── 🐍 vllm_policy.py   # vLLM 策略包装器
+│   └── 🎓 training/
+│       └── 🐍 sft_dataset.py   # SFT 数据收集
+├── 📜 scripts/
+│   ├── 🚀 train/grpo/          # GRPO 训练启动脚本
+│   │   ├── 📜 run_exp1_turn_discount.sh
+│   │   ├── 📜 run_exp2_lata.sh
+│   │   ├── 📜 run_exp3_prm_lite.sh
+│   │   ├── 📜 run_exp4_prm_lite_lata.sh
+│   │   └── 📜 run_vanilla.sh
+│   ├── 📈 eval/                # 独立评测启动脚本
+│   │   ├── 📜 eval_exp1_turn_discount.sh
+│   │   ├── 📜 eval_exp2_lata.sh
+│   │   ├── 📜 eval_exp3_prm_lite.sh
+│   │   └── 📜 eval_exp4_prm_lite_lata.sh
+│   ├── 🔧 train/sft/           # SFT 预热脚本
+│   └── 🖥️ vllm_server/         # vLLM 服务启动脚本
+├── 📚 docs/
+│   └── 🔬 ablation/
+│       ├── 📝 ablation_diagnosis_report.md   # 完整诊断报告（≈800 行）
+│       ├── 📝 ablation_plan.md               # 实验设计手册
+│       ├── 🖼️ ablation_comparison.png
+│       └── 🖼️ ablation_progression.png
+├── 🧪 experiments/             # 检查点、HF 导出、评测输出
+├── 📄 requirements.txt
+└── 🔨 setup.sh                 # 一键环境搭建
 ```
 
 ---
