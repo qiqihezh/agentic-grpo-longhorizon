@@ -1,0 +1,36 @@
+collect:
+  best_of_n: 16
+  holdout_size: 15
+  max_turns: 30
+  num_workers: 4
+  temperatures:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+env:
+  name: airline
+  task_split: test
+  user_base_url: http://localhost:8001/v1
+  user_model: Qwen/Qwen2.5-72B-Instruct-AWQ
+  user_provider: openai
+  user_strategy: llm
+output:
+  dir: experiments/sft_collect_airline
+policy:
+  base_url: http://localhost:8000/v1
+  max_tokens: 768
+  model_name: Qwen/Qwen2.5-72B-Instruct-AWQ
+  top_p: 0.9

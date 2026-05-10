@@ -1,0 +1,26 @@
+# PRM-Lite step250 在 tau-bench retail 上的跨域泛化评测（tiny 快速验证）
+# 只跑前 10 个 task，2 samples，用于快速验证 pipeline
+
+env:
+  name: retail
+  user_strategy: llm
+  user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+  user_provider: openai
+  user_base_url: "http://localhost:8001/v1"
+  task_split: test
+
+policy:
+  model_name: "Qwen/Qwen2.5-7B-Instruct"
+  base_url: "http://localhost:8000/v1"
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+
+eval:
+  num_tasks: 10
+  num_samples_per_task: 2
+  max_turns: 30
+  num_workers: 2
+
+output:
+  dir: "experiments/prm_lite/eval_retail_step250_tiny"

@@ -1,0 +1,185 @@
+{
+  "task_id": 47,
+  "best_of_n": 16,
+  "num_successes": 5,
+  "num_contaminated": 0,
+  "any_success": true,
+  "attempts": [
+    {
+      "sample_idx": 0,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 8,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 1,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 6,
+      "num_tool_calls": 2,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 2,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 8,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 3,
+      "temperature": 0.0,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 19,
+      "num_tool_calls": 12,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 4,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 8,
+      "num_tool_calls": 3,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 5,
+      "temperature": 0.5,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 14,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 6,
+      "temperature": 0.5,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 14,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 7,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 8,
+      "num_tool_calls": 3,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 8,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 9,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 9,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 7,
+      "num_tool_calls": 3,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 10,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 6,
+      "num_tool_calls": 2,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 11,
+      "temperature": 0.8,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 15,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 12,
+      "temperature": 1.0,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 15,
+      "num_tool_calls": 9,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 13,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 11,
+      "num_tool_calls": 4,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 14,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 9,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 15,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 7,
+      "num_tool_calls": 3,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    }
+  ]
+}

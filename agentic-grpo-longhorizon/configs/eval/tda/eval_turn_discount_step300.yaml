@@ -1,0 +1,26 @@
+# Exp 1: Turn-discount GRPO hf_step_300 评测配置
+# policy = hf_step_300, user sim = 72B-AWQ
+
+env:
+  name: airline
+  user_strategy: llm
+  user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+  user_provider: openai
+  user_base_url: "http://localhost:8001/v1"
+  task_split: test
+
+policy:
+  model_name: "Qwen/Qwen2.5-7B-Instruct"
+  base_url: "http://localhost:8000/v1"
+  temperature: 0.7
+  top_p: 0.9
+  max_tokens: 4096
+
+eval:
+  num_tasks: 50
+  num_samples_per_task: 4
+  max_turns: 30
+  num_workers: 2
+
+output:
+  dir: "experiments/turn_discount/eval_step_300"

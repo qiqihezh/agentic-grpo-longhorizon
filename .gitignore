@@ -1,0 +1,56 @@
+# Ignore everything in experiments except specified directories
+agentic-grpo-longhorizon/experiments/*
+!agentic-grpo-longhorizon/experiments/baseline_airline_72B_user/
+!agentic-grpo-longhorizon/experiments/eval_sft_airline/
+!agentic-grpo-longhorizon/experiments/sft_collect_airline/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model checkpoints (general safety)
+*.pt
+*.pth
+*.ckpt
+*.safetensors

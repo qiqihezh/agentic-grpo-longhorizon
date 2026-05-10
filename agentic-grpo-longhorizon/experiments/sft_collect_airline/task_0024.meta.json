@@ -1,0 +1,185 @@
+{
+  "task_id": 24,
+  "best_of_n": 16,
+  "num_successes": 2,
+  "num_contaminated": 0,
+  "any_success": true,
+  "attempts": [
+    {
+      "sample_idx": 0,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 11,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 1,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 25,
+      "num_tool_calls": 10,
+      "error": "RuntimeError: [CONTEXT_LENGTH_EXCEEDED] n_msgs=52, est_chars=34383: Error code: 400 - {'object': 'error', 'message': \"This model's maximum context length is 16384 tokens. However, you requested 16443 tokens (15675 in the messages, 768 in the completion). Please reduce the length of the messages or completion.\", 'type': 'BadRequestError', 'param': None, 'code': 400}\nTraceback (most recent call last):\n  File \"/workspace/agentic-grpo-longhorizon/src/models/vllm_policy.py\", line 138, in __call__\n    resp = self.client.chat.completions.create(**kwargs)\n  File \"/opt/conda/envs/agentrl/lib/python3.10/site-packages/openai/_utils/_utils.py\", line 286, in wrapper\n    return func(*args, **kwargs)\n  File \"/opt/conda/envs/agentrl/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py\", line 1204, in create\n    return self._post(\n  File \"/opt/conda/envs/agentrl/lib/python3.10/site-packages/openai/_base_client.py\", line 1297, in post\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\n  File \"/opt/conda/envs/agentrl/lib/python3.10/site-packages/openai/_base_client.py\", line 1070, in request\n    raise self._make_status_error_from_response(err.response) from None\nopenai.BadRequestError: Error code: 400 - {'object': 'error', 'message': \"This model's maximum context length is 16384 tokens. However, you requested 16443 tokens (15675 in the messages, 768 in the completion). Please reduce the length of the messages or completion.\", 'type': 'BadRequestError', 'param': None, 'code': 400}\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/workspace/agentic-grpo-longhorizon/src/envs/tau_bench_wrapper.py\", line 138, in run_single_task\n    assistant_msg = policy(messages)\n  File \"/workspace/agentic-grpo-longhorizon/src/models/vllm_policy.py\", line 173, in __call__\n    raise RuntimeError(\nRuntimeError: [CONTEXT_LENGTH_EXCEEDED] n_msgs=52, est_chars=34383: Error code: 400 - {'object': 'error', 'message': \"This model's maximum context length is 16384 tokens. However, you requested 16443 tokens (15675 in the messages, 768 in the completion). Please reduce the length of the messages or completion.\", 'type': 'BadRequestError', 'param': None, 'code': 400}\n",
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 2,
+      "temperature": 0.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 10,
+      "num_tool_calls": 9,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 3,
+      "temperature": 0.0,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 15,
+      "num_tool_calls": 13,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 4,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 15,
+      "num_tool_calls": 12,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 5,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 13,
+      "num_tool_calls": 14,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 6,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 12,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 7,
+      "temperature": 0.5,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 12,
+      "num_tool_calls": 14,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 8,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 10,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 9,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 13,
+      "num_tool_calls": 9,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 10,
+      "temperature": 0.8,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 12,
+      "num_tool_calls": 9,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 11,
+      "temperature": 0.8,
+      "success": true,
+      "reward": 1.0,
+      "num_turns": 10,
+      "num_tool_calls": 7,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 12,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 14,
+      "num_tool_calls": 10,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 13,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 30,
+      "num_tool_calls": 13,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 14,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 10,
+      "num_tool_calls": 10,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    },
+    {
+      "sample_idx": 15,
+      "temperature": 1.0,
+      "success": false,
+      "reward": 0.0,
+      "num_turns": 10,
+      "num_tool_calls": 8,
+      "error": null,
+      "was_contaminated": false,
+      "contaminated_from_turn": null
+    }
+  ]
+}

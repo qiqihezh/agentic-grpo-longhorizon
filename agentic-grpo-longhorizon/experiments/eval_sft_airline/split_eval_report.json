@@ -1,0 +1,69 @@
+{
+  "config": {
+    "env": {
+      "name": "airline",
+      "user_strategy": "llm",
+      "user_model": "Qwen/Qwen2.5-72B-Instruct-AWQ",
+      "user_provider": "openai",
+      "user_base_url": "http://localhost:8001/v1",
+      "task_split": "test"
+    },
+    "policy": {
+      "model_name": "Qwen/Qwen2.5-7B-Instruct",
+      "base_url": "http://localhost:8000/v1",
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "max_tokens": 1024
+    },
+    "eval": {
+      "num_tasks": 50,
+      "num_samples_per_task": 4,
+      "max_turns": 30,
+      "num_workers": 2
+    },
+    "output": {
+      "dir": "experiments/eval_sft_airline"
+    }
+  },
+  "split_file": "experiments/sft_collect_airline/split.json",
+  "covered_seen": {
+    "n_tasks": 16,
+    "pass_at_1": 0.625,
+    "pass_hat_1": 0.328125,
+    "pass_hat_4": 0.625,
+    "pass_hat_8": 0.0,
+    "avg_turns": 14.203125,
+    "avg_tool_calls": 9.890625,
+    "error_rate": 0.0
+  },
+  "uncovered_seen": {
+    "n_tasks": 24,
+    "pass_at_1": 0.08333333333333333,
+    "pass_hat_1": 0.020833333333333332,
+    "pass_hat_4": 0.08333333333333333,
+    "pass_hat_8": 0.0,
+    "avg_turns": 14.28125,
+    "avg_tool_calls": 9.0,
+    "error_rate": 0.010416666666666666
+  },
+  "unseen": {
+    "n_tasks": 10,
+    "pass_at_1": 0.2,
+    "pass_hat_1": 0.15,
+    "pass_hat_4": 0.2,
+    "pass_hat_8": 0.0,
+    "avg_turns": 15.125,
+    "avg_tool_calls": 9.25,
+    "error_rate": 0.0
+  },
+  "overall": {
+    "n_tasks": 50,
+    "pass_at_1": 0.28,
+    "pass_hat_1": 0.145,
+    "pass_hat_4": 0.28,
+    "pass_hat_8": 0.0,
+    "avg_turns": 14.425,
+    "avg_tool_calls": 9.335,
+    "error_rate": 0.005
+  }
+}

@@ -1,0 +1,14 @@
+# Exp 3: PRM-Lite reward mode
+# 唯一区别: reward_mode: prm_lite (vs binary)
+interaction:
+  - name: "tau_bench_airline"
+    class_name: "src.envs.tau_bench_interaction.TauBenchInteraction"
+    config:
+      env_name: "airline"
+      user_strategy: "llm"
+      user_model: "Qwen/Qwen2.5-72B-Instruct-AWQ"
+      user_provider: "openai"
+      user_base_url: "http://localhost:8001/v1"
+      task_split: "test"
+      max_turns: 30
+      reward_mode: "prm_lite"
