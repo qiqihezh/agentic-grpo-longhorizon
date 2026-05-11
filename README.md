@@ -7,7 +7,8 @@
 
 > **解决长链路多工具智能体中的 GRPO 训练崩溃问题**  
 > 在 τ-bench airline（50 任务、多轮对话、多工具调用场景）上的系统性消融实验，通过创新的 **PRM-Lite + LATA 联合方案**，相较 Vanilla GRPO 基线实现 **+37% 的整体 pass^1 提升**。
-
+> 
+>Swanlab训练曲线链接：https://swanlab.cn/@godstear/agentic-grpo-longhorizon?utm_source=website_qr&utm_medium=qr_scan
 ---
 
 ## 🔥 核心结果
