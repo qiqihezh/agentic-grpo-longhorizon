@@ -246,3 +246,15 @@ bash eval_exp4_prm_lite_lata.sh
 ---
 
 > **Why this matters**: Most RLHF/RLAIF work focuses on single-turn QA or coding. This project tackles the harder problem — **multi-turn, multi-tool, partially-observable conversational agents** — where vanilla GRPO catastrophically fails. The PRM-Lite + LATA joint design offers a principled, lightweight, and interpretable path to stable training without requiring expensive learned reward models.
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=qiqihezh%2Fagentic-grpo-longhorizon&type=date&legend=bottom-right">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&theme=dark&legend=bottom-right" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&legend=bottom-right" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&legend=bottom-right" />
+ </picture>
+</a>
