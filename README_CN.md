@@ -128,3 +128,132 @@
 ---
 
 ## 🏗️ 项目结构
+
+```
+agentic-grpo-longhorizon/
+├── configs/                    # 所有实验的 Hydra YAML 配置
+│   ├── turn_discount.yaml
+│   ├── prm_lite.yaml
+│   ├── lata.yaml
+│   ├── prm_lite_lata.yaml
+│   └── eval/                   # 各实验评测配置
+├── src/
+│   ├── envs/                   # τ-bench 包装器与工具配置
+│   │   ├── tau_bench_wrapper.py
+│   │   ├── tau_bench_interaction.py   # PRM-Lite 规则引擎
+│   │   └── tau_bench_tools.py
+│   ├── evaluation/
+│   │   └── pass_k_eval.py      # 独立 pass@k 评测器
+│   ├── models/
+│   │   └── vllm_policy.py      # vLLM 策略包装器
+│   └── training/
+│       └── sft_dataset.py      # SFT 数据收集
+├── scripts/
+│   ├── train/grpo/             # GRPO 训练启动脚本
+│   │   ├── run_exp1_turn_discount.sh
+│   │   ├── run_exp2_lata.sh
+│   │   ├── run_exp3_prm_lite.sh
+│   │   ├── run_exp4_prm_lite_lata.sh
+│   │   └── run_vanilla.sh
+│   ├── eval/                   # 独立评测启动脚本
+│   │   ├── eval_exp1_turn_discount.sh
+│   │   ├── eval_exp2_lata.sh
+│   │   ├── eval_exp3_prm_lite.sh
+│   │   └── eval_exp4_prm_lite_lata.sh
+│   ├── train/sft/              # SFT 预热脚本
+│   └── vllm_server/            # vLLM 服务启动脚本
+├── docs/
+│   └── ablation/
+│       ├── ablation_diagnosis_report.md   # 完整诊断报告（≈800 行）
+│       ├── ablation_plan.md               # 实验设计手册
+│       ├── ablation_comparison.png
+│       └── ablation_progression.png
+├── experiments/                # 检查点、HF 导出、评测输出
+├── requirements.txt
+└── setup.sh                    # 一键环境搭建
+```
+
+---
+
+## 🚀 快速开始
+
+### 1. 环境搭建
+
+```bash
+# 一键搭建（conda + PyTorch 2.7 + CUDA 12.6 + 依赖）
+bash setup.sh
+conda activate agentrl
+
+# 或手动安装：
+pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cu126
+pip install -r requirements.txt
+cd ../tau-bench && pip install -e .
+cd ../verl && pip install -e .
+```
+
+### 2. 训练模型
+
+```bash
+# 示例：联合方案（PRM-Lite + LATA）
+cd scripts/train/grpo
+bash run_exp4_prm_lite_lata.sh
+
+# 或：Vanilla GRPO 基线
+bash run_vanilla.sh
+```
+
+### 3. 独立评测
+
+```bash
+# 自动评测 step 200/250/300 检查点
+cd scripts/eval
+bash eval_exp4_prm_lite_lata.sh
+```
+
+> **硬件**：2×A800（80GB）。GPU 0 运行 7B 策略 vLLM；GPU 1 运行 72B-AWQ 用户模拟器 vLLM。  
+> **离线模式**：所有脚本注入 `HF_HUB_OFFLINE=1` 和 `TRANSFORMERS_OFFLINE=1`，适用于隔离环境。
+
+---
+
+## 📚 文档
+
+| 文档 | 内容 |
+|----------|---------|
+| [`docs/ablation/ablation_diagnosis_report.md`](docs/ablation/ablation_diagnosis_report.md) | **主报告**：训练曲线、评测数据、机制分析、假设验证 |
+| [`docs/ablation/ablation_plan.md`](docs/ablation/ablation_plan.md) | 实验设计手册：代码实现、PRM-Lite 规则集、黑客风险分析 |
+| [`docs/vanilla_grpo/vanilla_grpo_diagnosis.md`](docs/vanilla_grpo/vanilla_grpo_diagnosis.md) | Vanilla GRPO 崩溃诊断：三个根本原因、五个检查点分析 |
+
+---
+
+## 🛠️ 技术栈
+
+- **训练框架**: [veRL](https://github.com/volcengine/verl) 0.6.1 (FSDP + vLLM V1)
+- **策略模型**: Qwen2.5-7B-Instruct
+- **用户模拟器**: Qwen2.5-72B-Instruct-AWQ
+- **评测基准**: [τ-bench](https://github.com/sierra-research/tau-bench) airline (50 任务)
+- **推理引擎**: vLLM V1 with tool-call parsing (Hermes)
+- **注意力机制**: FlashAttention-2
+
+---
+
+## 🙏 致谢
+
+- [veRL](https://github.com/volcengine/verl) 开源 RL 训练框架
+- [τ-bench](https://github.com/sierra-research/tau-bench) 挑战性长链路智能体评测基准
+- [Qwen](https://github.com/QwenLM/Qwen) 系列模型提供的强大基座策略
+
+---
+
+> **为什么重要**：大多数 RLHF/RLAIF 工作聚焦单轮问答或代码生成。本项目 tackle 更难的问题 —— **多轮、多工具、部分可观测的对话智能体** —— 在这里 vanilla GRPO 会灾难性失败。PRM-Lite + LATA 联合设计提供了一条有原理支撑、轻量且可解释的通往稳定训练的路径，无需昂贵的学习式奖励模型。
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=qiqihezh%2Fagentic-grpo-longhorizon&type=date&legend=bottom-right">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&theme=dark&legend=bottom-right" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&legend=bottom-right" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=qiqihezh/agentic-grpo-longhorizon&type=date&legend=bottom-right" />
+ </picture>
+</a>
